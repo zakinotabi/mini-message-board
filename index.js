@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const path = require('path');
+// const port = 3000;/
 
 // Each route file handles a different URL path. Keeping them separate
 // importing them
@@ -9,12 +10,13 @@ const messagesRoute = require('./routes/messages');
 
 // access files from the "public" folder directly, no route needed (href="/styles.css" instead of ../../..)).
 // So public/styles.css becomes accessible at the URL /styles.css
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Tells Express to use EJS for rendering pages, and to look for
 // template files in a folder called "views" by default.
 // you can make it more focused if you're afraid that it will search somewhere else, but thus is just fine now
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // REMEMBER THIS ONE: without this line, req.body (in messages) is always undefined.
 // This "middleware" reads form data sent by <form method="POST"> and
@@ -26,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', homeRoute);
 app.use('/new', messagesRoute);
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`listening on port ${port}`);
+// });
+
+module.exports = app; // Essential for Vercel Serverless
