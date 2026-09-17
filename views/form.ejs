@@ -9,8 +9,19 @@
   <body>
     <h1>New Message</h1>
 
+    <!--
+      method="POST": sends data in the request body (not visible in the URL).
+      action="/new": where the form data gets sent . matches app.use('/new', messagesRoute)
+      in index.js, so this hits message.js's router.post('/') handler.
+    -->
+
     <form method="POST" action="/new">
       <div class="form-group">
+        <!--
+          "name" is the important attribute here . it decides the key name
+          in req.body on the server. name="user" here matches req.body.user
+          in message.js. If these don't match, req.body.user is undefined.
+        -->
         <label for="user">User:</label>
         <input type="text" id="user" name="user" required />
       </div>

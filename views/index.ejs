@@ -12,12 +12,24 @@
   <a href="/new" class="btn">+ New Message</a>
 </div>
   <ul>
+<!--  
+    // This next line is just a plain JS for-each loop.
+    // We're NOT printing anything here, just starting the loop —
+    // that's why it's <% %> and not <%= %>.
+-->
+
   <% messages.forEach(function(msg) { %>
     <li>
+<!-- msg.user is a string, so <%= %> prints it directly onto the page -->
       <strong><%= msg.user %>:</strong>
        <%= msg.text %> 
        <em><%= msg.added %></em>
       </li>
+<!-- 
+      // This closes the loop we opened above. Again, no output,
+      // just JS logic, so it's <% %> not <%= %>.
+      // closing with });
+ -->
   <% }); %>
   </ul>
   </body>
