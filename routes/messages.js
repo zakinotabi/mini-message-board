@@ -13,7 +13,12 @@ router.post('/', (req, res) => {
   messages.push({
     text: req.body.text,
     user: req.body.user,
-    added: new Date(),
+    added: new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
   });
 
   // Sends the browser back to "/", which triggers a fresh GET request
